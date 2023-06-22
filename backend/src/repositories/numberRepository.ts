@@ -1,7 +1,7 @@
 import fs from 'fs/promises';
 import path from 'path';
 
-export const numberRespository = {
+export const numberRepository = {
   async getNumber(): Promise<string> {
     return await fs.readFile(
       path.join(__dirname, '../data', 'data.txt'),
