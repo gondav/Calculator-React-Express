@@ -1,11 +1,10 @@
-import { Request, Response, NextFunction } from 'express';
-import { IApiError } from '../models/apiError';
+import { Request, Response } from 'express';
+import { ApiError } from '../models/apiError';
 
 export default function errorHandler(
-  error: IApiError | Error,
+  error: ApiError | Error,
   _req: Request,
-  res: Response,
-  _next: NextFunction
+  res: Response
 ) {
   if (error instanceof Error || !error.status) {
     return res
