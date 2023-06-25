@@ -1,9 +1,17 @@
 .btn-accent {
   @apply h-20 bg-cyan-500 border-b border-r;
+
+  &:hover, &:focus {
+    filter: brightness(1.2);
+  }
 }
   
 .btn-primary {
   @apply h-20 bg-neutral-700 border-b;
+
+  &:hover, &:focus {
+    filter: brightness(1.2);
+  }
 }
 
 .display {
