@@ -25,11 +25,24 @@ $ npm install
 ## Configuration
 
 1. Create a .env file in the root directory of the project.
+2. Specify the necessary environment variables in the .env file. For example:
+
+`
+PORT=5050
+`
+
+## Development
+
+To run the backend in development mode:
+
+1. Ensure that the dependencies are installed (see the Installation section).
 2. Start the development server using the following command:
 
 `
 $ npm run dev
 `
+
+The server will be running at http://localhost:5050.
 
 ## Production
 
