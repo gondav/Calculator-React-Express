@@ -19,7 +19,7 @@ const App = () => {
           <button className="btn-accent">AC</button>
           <OperationButton
             className="btn-primary"
-            operation="/"
+            operation="÷"
             dispatch={dispatch}
           ></OperationButton>
           <DigitButton

@@ -105,7 +105,7 @@ function evaluate({
     case 'x':
       computation = prev * curr;
       break;
-    case '/':
+    case '÷':
       computation = prev / curr;
       break;
     case '-':
