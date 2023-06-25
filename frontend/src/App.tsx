@@ -1,4 +1,4 @@
-import { useReducer } from 'react';
+import { useReducer, useState } from 'react';
 import Display from './components/Display';
 import './App.scss';
 import { ActionType } from './models/actionType';
@@ -9,26 +9,36 @@ import { memoryApi } from './api/memoryApi';
 
 const App = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
+  const [error, setError] = useState(false);
 
-  function handleMemoryRead(): void {
-    memoryApi.getNumber().then((data) => {
-      const { number } = data;
+  async function handleMemoryRead(): Promise<void> {
+    try {
+      const data = await memoryApi.getNumber();
       dispatch({
         type: ActionType.ReadMemory,
-        payload: { digit: number },
+        payload: { digit: data.number },
       });
-    });
+    } catch {
+      setError(true);
+      console.error('An error occured');
+    }
   }
 
   function handleMemorySave(): void {
     const { currentOperand } = state;
-    memoryApi.saveNumber(currentOperand);
+
+    try {
+      memoryApi.saveNumber(currentOperand);
+    } catch {
+      setError(true);
+      console.error('An error occured');
+    }
   }
 
   return (
     <div className="main-container">
       <div className="mx-auto w-80">
-        <Display state={state} />
+        <Display state={state} error={error} />
         <div className="grid grid-cols-4 grid-rows-5 text-neutral-50">
           <button className="btn-accent" onClick={handleMemorySave}>
             MS
