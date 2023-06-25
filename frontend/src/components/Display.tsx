@@ -2,9 +2,10 @@ import { State } from '../models/state';
 
 interface DisplayProps {
   state: Readonly<State>;
+  error: boolean;
 }
 
-const Display = ({ state }: DisplayProps) => {
+const Display = ({ state, error }: DisplayProps) => {
   return (
     <div className="display flex flex-col items-end justify-between  bg-neutral-700 border-b">
       <div className="previous-operand text-neutral-400">
@@ -14,7 +15,7 @@ const Display = ({ state }: DisplayProps) => {
       </div>
       <div className="current-operand text-neutral-100 text-3xl">
         <p className="text-right px-4 pb-4 max-w-xs break-words">
-          {state.currentOperand}
+          {error ? 'Error' : state.currentOperand}
         </p>
       </div>
     </div>
