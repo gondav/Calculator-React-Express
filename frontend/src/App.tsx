@@ -5,18 +5,43 @@ import { ActionType } from './models/actionType';
 import OperationButton from './components/OperationButton';
 import DigitButton from './components/DigitButton';
 import { initialState, reducer } from './services/calculatorService';
+import { memoryApi } from './api/memoryApi';
 
 const App = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
+
+  function handleMemoryRead(): void {
+    memoryApi.getNumber().then((data) => {
+      const { number } = data;
+      dispatch({
+        type: ActionType.ReadMemory,
+        payload: { digit: number },
+      });
+    });
+  }
+
+  function handleMemorySave(): void {
+    const { currentOperand } = state;
+    memoryApi.saveNumber(currentOperand);
+  }
 
   return (
     <div className="main-container">
       <div className="mx-auto w-80">
         <Display state={state} />
         <div className="grid grid-cols-4 grid-rows-5 text-neutral-50">
-          <button className="btn-accent">MS</button>
-          <button className="btn-accent">MR</button>
-          <button className="btn-accent">AC</button>
+          <button className="btn-accent" onClick={handleMemorySave}>
+            MS
+          </button>
+          <button className="btn-accent" onClick={handleMemoryRead}>
+            MR
+          </button>
+          <button
+            className="btn-accent"
+            onClick={() => dispatch({ type: ActionType.Clear })}
+          >
+            AC
+          </button>
           <OperationButton
             className="btn-primary"
             operation="÷"
