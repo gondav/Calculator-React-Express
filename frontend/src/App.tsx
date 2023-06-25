@@ -11,7 +11,7 @@ const App = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [error, setError] = useState(false);
 
-  async function handleMemoryRead(): Promise<void> {
+  const handleMemoryRead = async (): Promise<void> => {
     try {
       const data = await memoryApi.getNumber();
       dispatch({
@@ -22,9 +22,9 @@ const App = () => {
       setError(true);
       console.error('An error occured');
     }
-  }
+  };
 
-  function handleMemorySave(): void {
+  const handleMemorySave = async (): Promise<void> => {
     const { currentOperand } = state;
 
     try {
@@ -33,11 +33,11 @@ const App = () => {
       setError(true);
       console.error('An error occured');
     }
-  }
+  };
 
   return (
     <div className="main-container">
-      <div className="mx-auto w-80">
+      <div className="mx-auto w-80 mt-8">
         <Display state={state} error={error} />
         <div className="grid grid-cols-4 grid-rows-5 text-neutral-50">
           <button className="btn-accent" onClick={handleMemorySave}>
